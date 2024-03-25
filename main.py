@@ -6,12 +6,13 @@ import time
 import threading
 
 def timer():
+        i = 0
         while(True):
-            i = 0
             mins, secs = divmod(i, 60)
             time_format = '{:02d}:{:02d}'.format(mins, secs)
             print(time_format, end='\r')
             time.sleep(1)
+            i = i + 1
 
 def record_until_keypress(fs=44100, channels=2, filename='output_until_keypress.wav'):
     """
@@ -47,5 +48,18 @@ def record_until_keypress(fs=44100, channels=2, filename='output_until_keypress.
         write(filename, fs, recording_array)
         print(f"Recording saved as '{filename}'")
 
-# Example usage
-record_until_keypress()
+def start_recording_with_timer():
+    # Define threads for recording and timer
+    recording_thread = threading.Thread(target=record_until_keypress, args=(44100, 2, 'output_until_keypress.wav'))
+    timer_thread = threading.Thread(target=timer)
+    
+    # Start threads
+    timer_thread.start()
+    recording_thread.start()
+    
+    # Wait for both threads to complete
+    recording_thread.join()
+    timer_thread.join()
+    print("Both recording and timer have finished.")
+
+start_recording_with_timer()
