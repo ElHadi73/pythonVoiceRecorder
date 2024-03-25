@@ -1,4 +1,4 @@
-mkdir bin
+mkdir -p bin
 cp src/voiceRecorder.sh bin/voiceRecorder
 chmod 777 bin/voiceRecorder
 

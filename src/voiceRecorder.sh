@@ -20,7 +20,7 @@ destinationPath=$1
 #destinationPath="/home/oli/Music/recordings/"
 
 #start recording program
-python3 voiceRecorderDir/voiceRecorder.py
+python3 /bin/voiceRecorderDir/voiceRecorder.py
 
 # Give read permissions to everyone
 chmod 444 "record.wav"
